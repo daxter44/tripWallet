@@ -1,0 +1,26 @@
+<form [formGroup]="tripform" (ngSubmit)="submit()">
+  <ion-item>
+    <ion-label  position="stacked">Name:</ion-label>
+    <ion-input type="text" formControlName="name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label  position="stacked">Budget:</ion-label>
+    <ion-textarea formControlName="budget"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label  position="stacked">Currency:</ion-label>
+    <ion-textarea formControlName="currency"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label  position="stacked">Start date:</ion-label>
+    <ion-textarea formControlName="startDate"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label  position="stacked">End date:</ion-label>
+    <ion-textarea formControlName="endDate"></ion-textarea>
+  </ion-item>
+
+  <ion-button  type="submit" [disabled]="!tripform.valid">
+    Create
+  </ion-button>
+</form>

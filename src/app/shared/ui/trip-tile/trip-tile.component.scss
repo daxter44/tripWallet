@@ -1,0 +1,45 @@
+
+
+:host {
+  cursor: pointer;
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%;
+
+  .ratio-16-9 {
+    aspect-ratio: 16/9;
+  }
+
+  ion-icon {
+    cursor: pointer;
+  }
+
+  ion-card {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  ion-card-header {
+    bottom: 8px;
+    border-radius: 8px;
+  }
+
+  .text-with-icon {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  ion-img {
+    display: inline-block;
+    border-radius: 20px 20px 0 0;
+
+    &:not(.card-icon) {
+      width: 100%;
+    }
+
+    &.card-icon::part(image) {
+      padding-right: 8px;
+      height: 17px;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+import { createFeature, createReducer, on } from "@ngrx/store";
+import { createEntityAdapter, EntityAdapter } from "@ngrx/entity";
+import { trip } from "src/app/shared/interfaces/trip.interface";
+import { TripsState } from "src/app/shared/interfaces/tripsState.interface";
+import * as tripActions from "../actions/trip.actions";
+
+
+export const tripAdapter: EntityAdapter<trip> = createEntityAdapter<trip>({
+  selectId: entity=>entity.tripId, 
+});
+
+export const tripsInitialState: TripsState = tripAdapter.getInitialState({});
+  
+export const tripsFeature = createFeature({
+  name: "trips",
+  reducer: createReducer(tripsInitialState,  
+    on(tripActions.addTrip, (state, { trip }) => {
+    return tripAdapter.addOne(trip, state)
+  }),),
+  
+})

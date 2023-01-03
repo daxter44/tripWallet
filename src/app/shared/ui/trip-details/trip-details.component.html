@@ -1,0 +1,45 @@
+<ion-card>
+  <ng-container *ngIf="{
+    trip: trip$ | async } as view">
+  <ion-card-header>
+    <ion-card-title>{{view.trip!.name}}</ion-card-title>
+    <ion-card-subtitle>{{tripLength(view.trip!.startDate, view.trip!.endDate)}} Days</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-icon name="cash-outline"></ion-icon>
+          <span class="text-with-icon ion-text-lowercase ion-padding-end">
+            1000 {{view.trip!.currency}} used
+          </span>
+        </ion-col>
+        <ion-col size="6">
+          <ion-icon name="cash-outline"></ion-icon>
+          <span class="text-with-icon ion-text-lowercase ion-padding-end">
+            {{view.trip!.budget}}
+          </span>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span class="text-with-icon ion-text-lowercase ion-padding-end">
+            {{view.trip!.startDate}}
+          </span>
+        </ion-col>
+        <ion-col size="6">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span class="text-with-icon ion-text-lowercase ion-padding-end">
+            {{view.trip!.endDate}}
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+
+  <ion-button fill="clear">Action 1</ion-button>
+  <ion-button fill="clear">Action 2</ion-button>
+</ng-container>
+</ion-card>
