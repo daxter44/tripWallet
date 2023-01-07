@@ -1,5 +1,6 @@
 export interface cost {
-  id: number;
+  costId: number;
+  tripId: number;
   type: string;
   amount: number;
   currency: string;

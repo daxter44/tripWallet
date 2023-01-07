@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -10,9 +10,9 @@ import { TripsPage } from './trips.page';
 import { CreateComponent } from './containers/create/create.component';
 import { ListComponent } from './containers/list/list.component';
 import { StoreModule } from '@ngrx/store';
-import { tripsFeature } from './store/reducers/trip.reducer';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AddCostComponent } from './containers/add-cost/add-cost.component';
+import { tripsFeature } from 'src/app/shared/store/trips/trip.reducer';
 
 @NgModule({
   imports: [
@@ -21,8 +21,9 @@ import { AddCostComponent } from './containers/add-cost/add-cost.component';
     IonicModule,
     SharedModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(tripsFeature),
     TripsPageRoutingModule
+  ],providers: [
+    DatePipe
   ],
   declarations: [TripsPage, CreateComponent, ListComponent, AddCostComponent]
 })

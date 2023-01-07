@@ -7,7 +7,7 @@
     <ion-card-subtitle class="sp-body-2-text">
       <span class="text-with-icon ion-text-lowercase ion-padding-end">
         <ion-icon name="calendar-outline"></ion-icon>
-        {{ trip.startDate }}
+        {{ trip.startDate | date: 'dd.MM.yyyy' }}
       </span>
 
       <span class="text-with-icon ion-text-capitalize ion-padding-end">

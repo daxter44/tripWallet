@@ -1,3 +1,28 @@
-<p>
-  add-cost works!
-</p>
+<form [formGroup]="costForm" (ngSubmit)="submit()">
+  <ion-item>
+    <ion-label  position="stacked">Type:</ion-label>
+    <ion-input type="text" formControlName="type"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label  position="stacked">Amount:</ion-label>
+    <ion-textarea formControlName="amount"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label  position="stacked">Currency:</ion-label>
+    <ion-textarea formControlName="currency"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Date: </ion-label>
+    <ion-datetime-button datetime="date"></ion-datetime-button>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="date" (ionChange)="getDate($event)" formControlName="date" [value]="defaultDate"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+
+  <ion-button  type="submit" [disabled]="!costForm.valid">
+    Create
+  </ion-button>
+</form>

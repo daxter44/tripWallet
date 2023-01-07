@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ViewDidEnter, ViewDidLeave } from '@ionic/angular';
+import { NavController, ViewDidEnter, ViewDidLeave } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { first, map, Observable, of, Subject, takeUntil } from 'rxjs';
-import { selectAllTrips } from 'src/app/containers/trips/store/selector/trip.selectors';
 import { trip } from '../../interfaces/trip.interface';
-import { TripsState } from '../../interfaces/tripsState.interface';
+import { TripsState } from '../../interfaces/storeStates/tripsState.interface';
 import { Destroyable } from '../../services/destroyable.component';
+import { selectAllTrips } from '../../store/trips/trip.selectors';
 
 @Component({
   selector: 'app-trip-details',
@@ -15,18 +15,19 @@ import { Destroyable } from '../../services/destroyable.component';
 })
 export class TripDetailsComponent extends Destroyable  
 implements OnInit, ViewDidLeave {
-  @Input() public trip$:  Observable<trip|undefined> = of(undefined);
+  public trip$:  Observable<trip|undefined> = of(undefined);
   public viewLeft = false;
 
   private clearPage$: Subject<void> = new Subject<void>();
-  constructor(private activeRoute: ActivatedRoute, private store: Store<TripsState>, private router: Router) {
+  constructor(private activeRoute: ActivatedRoute, private navController: NavController, private store: Store<TripsState>, private router: Router) {
     super();
   }
 
-  public tripLength(startDate:string, endDate:string): number {
-    let difference = new Date(endDate).getTime() -new Date(startDate).getTime();
-    return Math.ceil(difference / (1000 * 3600 * 24));
+  public countDays(startDate: Date, endDate: Date): number {
+    const days = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
+    return Math.ceil(days);
   }
+  
   ngOnInit(): void {
     this.initializeViewData();
   }
@@ -44,9 +45,12 @@ implements OnInit, ViewDidLeave {
     this.clearPage$.next();
     this.clearPage$.complete();
   }
-  
-  private initializeViewData(): void {
 
+  public addCost(tripId: number): void {
+    console.log(tripId);
+    this.navController.navigateForward(`/application/trips/${tripId}/addCost`);
+  }
+  private initializeViewData(): void {
     this.activeRoute.params
       .pipe(
         map((params) => params['id']),
@@ -58,7 +62,7 @@ implements OnInit, ViewDidLeave {
           .pipe(
             map((trips) => {
               if (trips.length > 0) {
-                this.trip$ = of(trips.find((trip) => trip.tripId ===id));
+                this.trip$ = of(trips.find((trip) => trip.tripId ===parseInt(id)));
               } else {
                 this.router.navigate(['/application/trips/list']);
               }

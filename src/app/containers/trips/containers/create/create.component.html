@@ -1,4 +1,4 @@
-<form [formGroup]="tripform" (ngSubmit)="submit()">
+<form [formGroup]="tripCreateForm" (ngSubmit)="submit()">
   <ion-item>
     <ion-label  position="stacked">Name:</ion-label>
     <ion-input type="text" formControlName="name"></ion-input>
@@ -12,15 +12,26 @@
     <ion-textarea formControlName="currency"></ion-textarea>
   </ion-item>
   <ion-item>
-    <ion-label  position="stacked">Start date:</ion-label>
-    <ion-textarea formControlName="startDate"></ion-textarea>
+    <ion-label position="stacked">Start date: </ion-label>
+    <ion-datetime-button datetime="startDatetime"></ion-datetime-button>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="startDatetime" (ionChange)="getStartDate($event)" formControlName="startDate" [value]="defaultDate"></ion-datetime>
+      </ng-template>
+    </ion-modal>
   </ion-item>
   <ion-item>
-    <ion-label  position="stacked">End date:</ion-label>
-    <ion-textarea formControlName="endDate"></ion-textarea>
-  </ion-item>
+    <ion-label position="stacked">End date: </ion-label>
+    <ion-datetime-button datetime="endDatetime"></ion-datetime-button>
 
-  <ion-button  type="submit" [disabled]="!tripform.valid">
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="endDatetime" (ionChange)="getEndDate($event)" formControlName="endDate" [value]="defaultDate"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+  </ion-item>
+  <ion-button  type="submit" [disabled]="!tripCreateForm.valid">
     Create
   </ion-button>
 </form>

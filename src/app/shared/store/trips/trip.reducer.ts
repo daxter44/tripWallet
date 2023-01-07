@@ -1,8 +1,8 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 import { createEntityAdapter, EntityAdapter } from "@ngrx/entity";
 import { trip } from "src/app/shared/interfaces/trip.interface";
-import { TripsState } from "src/app/shared/interfaces/tripsState.interface";
-import * as tripActions from "../actions/trip.actions";
+import { TripsState } from "src/app/shared/interfaces/storeStates/tripsState.interface";
+import * as tripActions from "./trip.actions";
 
 
 export const tripAdapter: EntityAdapter<trip> = createEntityAdapter<trip>({

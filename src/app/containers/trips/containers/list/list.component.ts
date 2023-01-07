@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { State } from 'src/app/shared/interfaces/state.interface';
-import { trip } from 'src/app/shared/interfaces/trip.interface';
-import { TripsState } from 'src/app/shared/interfaces/tripsState.interface';
-import { selectAllTrips } from '../../store/selector/trip.selectors';
+import { TripsState } from 'src/app/shared/interfaces/storeStates/tripsState.interface';
+import { selectAllTrips } from 'src/app/shared/store/trips/trip.selectors';
 
 @Component({
   selector: 'app-list',
