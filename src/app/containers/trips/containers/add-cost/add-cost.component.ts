@@ -29,50 +29,50 @@ export class AddCostComponent extends Destroyable implements OnInit {
    private newCostId: number = 0;
    private tripId: number = 0;
 
-   constructor(private store: Store<CostState>, private activeRoute: ActivatedRoute, private navController: NavController) {
+  constructor(private store: Store<CostState>, private activeRoute: ActivatedRoute, private navController: NavController) {
     super();
     this.store.select(selectAllCosts).pipe(takeUntil(this.destroyed$)).subscribe(costs => {
       this.newCostId = costs.length+1;
     });
-    }
+  }
 
   ngOnInit() {
     this.initializeViewData();
   }
 
- public submit() {
-  const cost : cost = {
-    costId: this.newCostId,
-    tripId: this.tripId,
-    type: this.costForm.get('type')?.value!,
-    amount: this.costForm.get('amount')?.value!,
-    currency: this.costForm.get('currency')?.value!,
-    date: this.costForm.get('date')?.value!
+  public submit() {
+    const cost : cost = {
+      costId: this.newCostId,
+      tripId: this.tripId,
+      type: this.costForm.get('type')?.value!,
+      amount: this.costForm.get('amount')?.value!,
+      currency: this.costForm.get('currency')?.value!,
+      date: this.costForm.get('date')?.value!
+    }
+    this.store.dispatch(costActions.addCost({cost}));
+    this.navController.navigateForward(`/application/trips/${this.tripId}/details`);
   }
-  this.store.dispatch({ type: '[Cost Store] Add cost', cost });
-  this.navController.navigateForward(`/application/trips/list`);
- }
 
- public clearPage(): void {
-  this.clearPage$.next();
-  this.clearPage$.complete();
-}
-public getDate(e: any) {
-  let date = new Date(e.target.value).toISOString();
-  this.costForm.get('date')!.setValue(date, {
-     onlyself: true
-  })
-}
+  public clearPage(): void {
+    this.clearPage$.next();
+    this.clearPage$.complete();
+  }
 
- private initializeViewData(): void {
-  this.activeRoute.params
+  public getDate(e: any) {
+    let date = new Date(e.target.value).toISOString();
+    this.costForm.get('date')!.setValue(date, {
+      onlyself: true
+    })
+  }
+
+  private initializeViewData(): void {
+    this.activeRoute.params
     .pipe(
       map((params) => params['id']),
       takeUntil(this.clearPage$)
     )
     .subscribe((id) => {
       this.tripId = parseInt(id);
-    });
+  });
 }
-
 }

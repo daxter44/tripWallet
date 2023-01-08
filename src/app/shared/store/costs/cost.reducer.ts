@@ -15,7 +15,10 @@ export const costsFeature = createFeature({
   name: "costs",
   reducer: createReducer(costsInitialState,  
     on(costActions.addCost, (state, { cost }) => {
-    return costAdapter.addOne(cost, state)
-  }),),
-  
+      return costAdapter.addOne(cost, state)
+    }),
+    on(costActions.removeCost, (state, { costId }) => {
+      return costAdapter.removeOne(costId, state)
+    }),
+  ),
 })

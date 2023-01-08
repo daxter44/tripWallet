@@ -40,8 +40,11 @@
       </ion-row>
     </ion-grid>
   </ion-card-content>
-  <ion-button (click)="addCost(view.trip!.tripId)">Add cost</ion-button>
-  <ion-list>
+  <div class="display-flex ion-justify-content-center">
+    <ion-button (click)="addCost(view.trip!.tripId)">Add cost</ion-button>
+  </div>
+  <ion-list class="ion-padding">
+    <h1>Costs</h1>
     <ion-item *ngFor="let cost of view.costs">
       <app-cost-tile [cost]="cost"></app-cost-tile>
     </ion-item>

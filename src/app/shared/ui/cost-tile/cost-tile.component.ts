@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, HostListener, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Store } from '@ngrx/store';
 import { cost } from '../../interfaces/cost.interface';
-import { trip } from '../../interfaces/trip.interface';
+import { CostState } from '../../interfaces/storeStates/costState.interface';
+import * as costActions from "../../store/costs/cost.actions";
 
 @Component({
   selector: 'app-cost-tile',
@@ -13,8 +15,12 @@ export class CostTileComponent implements OnInit {
   @Input() public cost: cost = {} as cost;
 
   constructor(
-    private navController: NavController) { }
+    private navController: NavController,  private store: Store<CostState>, ) { }
 
   ngOnInit() {}
+
+  public removeCost() {
+    this.store.dispatch(costActions.removeCost({ costId: this.cost.costId }));
+  }
 
 }

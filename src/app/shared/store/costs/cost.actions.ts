@@ -8,3 +8,8 @@ export const addCost = createAction(
     '[Cost Store] Add cost',
     props<{ cost: cost}>()
   );
+
+export const removeCost = createAction(
+  '[Cost Store] Remove cost',
+  props<{ costId: number}>()
+);
