@@ -21,7 +21,7 @@ export class CreateComponent extends Destroyable {
   tripCreateForm: FormGroup<tripCreate> = new FormGroup<tripCreate>({
     tripId: new FormControl<number|undefined>({value: undefined, disabled: false}, { nonNullable: true }),
     name: new FormControl<string>({value: '', disabled: false}, { nonNullable: true }),
-    budget: new FormControl<number|undefined>({value: undefined, disabled: false}, { nonNullable: true }),
+    budget: new FormControl<number>({value: 0, disabled: false}, { nonNullable: true }),
     currency: new FormControl<string>({value: '', disabled: false}, { nonNullable: true }),
     startDate: new FormControl<string>({value: this.defaultDate, disabled: false}, { nonNullable: true }),
     endDate: new FormControl<string>({value: this.defaultDate, disabled: false}, { nonNullable: true }),

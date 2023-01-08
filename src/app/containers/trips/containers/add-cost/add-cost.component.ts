@@ -21,9 +21,8 @@ export class AddCostComponent extends Destroyable implements OnInit {
   public defaultDate =new Date().toISOString();
   private clearPage$: Subject<void> = new Subject<void>();
   costForm: FormGroup<costForm> = new FormGroup<costForm>({
-
     type: new FormControl<string>({value: '', disabled: false}, { nonNullable: true }),
-    amount: new FormControl<number|undefined>({value: undefined, disabled: false}, { nonNullable: true }),
+    amount: new FormControl<number>({value: 0, disabled: false}, { nonNullable: true }),
     currency: new FormControl<string>({value: '', disabled: false}, { nonNullable: true }),
     date: new FormControl<string>({value: this.defaultDate, disabled: false}, { nonNullable: true })
    });
@@ -72,7 +71,7 @@ public getDate(e: any) {
       takeUntil(this.clearPage$)
     )
     .subscribe((id) => {
-      this.tripId = id;
+      this.tripId = parseInt(id);
     });
 }
 

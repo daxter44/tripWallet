@@ -7,6 +7,8 @@ import { trip } from '../../interfaces/trip.interface';
 import { TripsState } from '../../interfaces/storeStates/tripsState.interface';
 import { Destroyable } from '../../services/destroyable.component';
 import { selectAllTrips } from '../../store/trips/trip.selectors';
+import { cost } from '../../interfaces/cost.interface';
+import { selectAllCostByTrip } from '../../store/costs/cost.selectors';
 
 @Component({
   selector: 'app-trip-details',
@@ -16,6 +18,7 @@ import { selectAllTrips } from '../../store/trips/trip.selectors';
 export class TripDetailsComponent extends Destroyable  
 implements OnInit, ViewDidLeave {
   public trip$:  Observable<trip|undefined> = of(undefined);
+  public costs$:  Observable<cost[]> = of([]);
   public viewLeft = false;
 
   private clearPage$: Subject<void> = new Subject<void>();
@@ -47,10 +50,20 @@ implements OnInit, ViewDidLeave {
   }
 
   public addCost(tripId: number): void {
-    console.log(tripId);
     this.navController.navigateForward(`/application/trips/${tripId}/addCost`);
   }
+
+  public sumCosts(costs: cost[]): number {
+      return costs.reduce((acc, cost) => acc + cost.amount, 0);
+  }
+
   private initializeViewData(): void {
+    this.trip$.pipe(takeUntil(this.destroyed$)).subscribe(trip => {
+      console.log(trip);
+      if(trip) {
+        this.costs$ = this.store.select(selectAllCostByTrip(trip.tripId))
+      }
+    });
     this.activeRoute.params
       .pipe(
         map((params) => params['id']),
@@ -63,6 +76,7 @@ implements OnInit, ViewDidLeave {
             map((trips) => {
               if (trips.length > 0) {
                 this.trip$ = of(trips.find((trip) => trip.tripId ===parseInt(id)));
+                this.costs$ = this.store.select(selectAllCostByTrip(parseInt(id)));
               } else {
                 this.router.navigate(['/application/trips/list']);
               }
@@ -71,5 +85,6 @@ implements OnInit, ViewDidLeave {
           )
           .subscribe();
       });
+      
   }
 }

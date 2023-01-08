@@ -4,10 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TripTileComponent } from './ui/trip-tile/trip-tile.component';
 import { TripDetailsComponent } from './ui/trip-details/trip-details.component';
+import { CostTileComponent } from './ui/cost-tile/cost-tile.component';
 
 const ANGULAR_MODULES: any = [ReactiveFormsModule];
 
 const COMPONENTS: any = [
+    CostTileComponent,
     TripTileComponent,
     TripDetailsComponent
 ];
