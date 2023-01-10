@@ -15,7 +15,10 @@ export const tripsFeature = createFeature({
   name: "trips",
   reducer: createReducer(tripsInitialState,  
     on(tripActions.addTrip, (state, { trip }) => {
-    return tripAdapter.addOne(trip, state)
-  }),),
-  
+      return tripAdapter.addOne(trip, state)
+    }),
+    on(tripActions.loadTripStateSuccess, (state, { trip }) => {
+      return tripAdapter.setAll(trip, state)
+    }),
+  )
 })

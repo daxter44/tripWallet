@@ -10,6 +10,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TripStoreModule } from './shared/store/trips/trip-store.module';
 import { CostStoreModule } from './shared/store/costs/cost-store.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StorageService } from './shared/services/storage.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,11 +22,12 @@ import { CostStoreModule } from './shared/store/costs/cost-store.module';
     TripStoreModule,
     CostStoreModule,
     StoreModule.forRoot({}, {}), 
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       autoPause: true
     })],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, StorageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

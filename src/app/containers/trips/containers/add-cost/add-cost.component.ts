@@ -10,6 +10,8 @@ import { Destroyable } from 'src/app/shared/services/destroyable.component';
 import { selectAllCosts } from 'src/app/shared/store/costs/cost.selectors';
 import * as costActions from "../../../../shared/store/costs/cost.actions";
 import { cost } from 'src/app/shared/interfaces/cost.interface';
+import { CostType, costTypesInitialState } from 'src/app/shared/interfaces/costType.interface';
+import { costsInitialState } from 'src/app/shared/store/costs/cost.reducer';
 
 @Component({
   selector: 'app-add-cost',
@@ -19,9 +21,10 @@ import { cost } from 'src/app/shared/interfaces/cost.interface';
 export class AddCostComponent extends Destroyable implements OnInit {
 
   public defaultDate =new Date().toISOString();
+  public costTypes = costTypesInitialState;
   private clearPage$: Subject<void> = new Subject<void>();
   costForm: FormGroup<costForm> = new FormGroup<costForm>({
-    type: new FormControl<string>({value: '', disabled: false}, { nonNullable: true }),
+    type: new FormControl<CostType>({value: costTypesInitialState[0], disabled: false}, { nonNullable: true }),
     amount: new FormControl<number>({value: 0, disabled: false}, { nonNullable: true }),
     currency: new FormControl<string>({value: '', disabled: false}, { nonNullable: true }),
     date: new FormControl<string>({value: this.defaultDate, disabled: false}, { nonNullable: true })

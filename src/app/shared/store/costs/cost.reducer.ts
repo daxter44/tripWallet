@@ -20,5 +20,8 @@ export const costsFeature = createFeature({
     on(costActions.removeCost, (state, { costId }) => {
       return costAdapter.removeOne(costId, state)
     }),
+    on(costActions.loadCostStateSuccess, (state, { cost }) => {
+      return costAdapter.setAll(cost, state)
+    })
   ),
 })

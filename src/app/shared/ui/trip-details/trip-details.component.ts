@@ -9,6 +9,7 @@ import { Destroyable } from '../../services/destroyable.component';
 import { selectAllTrips } from '../../store/trips/trip.selectors';
 import { cost } from '../../interfaces/cost.interface';
 import { selectAllCostByTrip } from '../../store/costs/cost.selectors';
+import * as CostActions from "../../store/costs/cost.actions";
 
 @Component({
   selector: 'app-trip-details',
@@ -24,6 +25,8 @@ implements OnInit, ViewDidLeave {
   private clearPage$: Subject<void> = new Subject<void>();
   constructor(private activeRoute: ActivatedRoute, private navController: NavController, private store: Store<TripsState>, private router: Router) {
     super();
+
+    this.store.dispatch(CostActions.loadCostState());
   }
 
   public countDays(startDate: Date, endDate: Date): number {
