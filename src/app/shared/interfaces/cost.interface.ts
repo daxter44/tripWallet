@@ -6,5 +6,6 @@ export interface cost {
   type: CostType;
   amount: number;
   currency: string;
+  exchangeRate: number;
   date: string;
 }

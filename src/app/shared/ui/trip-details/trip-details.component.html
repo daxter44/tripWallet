@@ -13,26 +13,26 @@
       <ion-row>
         <ion-col size="6" *ngIf="view.costs">
           <ion-icon name="cash-outline"></ion-icon>
-          <span class="text-with-icon ion-text-lowercase ion-padding-end">
-            {{ sumCosts(view.costs) }}
+          <span class="text-with-icon ion-padding-end">
+            Used {{ sumCosts(view.costs)| number : '1.2-2' }} {{ view.trip!.currency }}
           </span>
         </ion-col>
         <ion-col size="6">
           <ion-icon name="cash-outline"></ion-icon>
-          <span class="text-with-icon ion-text-lowercase ion-padding-end">
-            {{view.trip!.budget}}
+          <span class="text-with-icon ion-padding-end">
+            Budget {{view.trip!.budget}} {{ view.trip!.currency }}
           </span>
           </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="6">
-          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-icon name="airplane-outline"></ion-icon>
           <span class="text-with-icon ion-text-lowercase ion-padding-end">
             {{view.trip!.startDate | date: 'dd.MM.yyyy'}}
           </span>
         </ion-col>
         <ion-col size="6">
-          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-icon name="home-outline"></ion-icon>
           <span class="text-with-icon ion-text-lowercase ion-padding-end">
             {{view.trip!.endDate | date: 'dd.MM.yyyy'}}
           </span>

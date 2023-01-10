@@ -57,7 +57,7 @@ implements OnInit, ViewDidLeave {
   }
 
   public sumCosts(costs: cost[]): number {
-      return costs.reduce((acc, cost) => acc + cost.amount, 0);
+      return costs.reduce((acc, cost) => cost.exchangeRate>0? acc + (cost.exchangeRate * cost.amount): acc + cost.amount, 0);
   }
 
   private initializeViewData(): void {

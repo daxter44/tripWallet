@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { Storage } from '@ionic/storage-angular';
+import { Store } from '@ngrx/store';
 import { from, Observable } from 'rxjs';
+import { TripsState } from '../interfaces/storeStates/tripsState.interface';
+import * as tripsActions from "../store/trips/trip.actions";
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +12,10 @@ import { from, Observable } from 'rxjs';
 export class StorageService {
   private _storage: Storage = new Storage;
 
-  constructor(private storage: Storage) {
-    this.init();
+  constructor(private storage: Storage, private store: Store<TripsState>) {
+    this.init().then(() => {
+      this.store.dispatch(tripsActions.loadTripState());})
+
   }
 
   async init() {

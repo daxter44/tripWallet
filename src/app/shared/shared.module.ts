@@ -7,6 +7,7 @@ import { TripDetailsComponent } from './ui/trip-details/trip-details.component';
 import { CostTileComponent } from './ui/cost-tile/cost-tile.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { StorageService } from './services/storage.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const ANGULAR_MODULES: any = [ReactiveFormsModule];
 
@@ -19,8 +20,9 @@ const COMPONENTS: any = [
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [CommonModule, ...ANGULAR_MODULES, IonicModule, 
-    IonicStorageModule.forRoot()],
+    IonicStorageModule.forRoot(), HttpClientModule],
   exports: [...ANGULAR_MODULES, ...COMPONENTS],
+  providers: [StorageService]
 
 })
 export class SharedModule {}

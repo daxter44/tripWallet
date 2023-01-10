@@ -5,7 +5,6 @@ import { TripsState } from 'src/app/shared/interfaces/storeStates/tripsState.int
 import { trip } from 'src/app/shared/interfaces/trip.interface';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { selectAllTrips } from 'src/app/shared/store/trips/trip.selectors';
-import * as tripsActions from "../../../../shared/store/trips/trip.actions";
 
 @Component({
   selector: 'app-list',
@@ -17,14 +16,7 @@ export class ListComponent{
   constructor(private store: Store<TripsState>, 
     private navController: NavController,
     private storageService: StorageService) {
-      // this.storageService.getP('trips').then((results:trip[]) => {
-      //   results.forEach((trip) => {
-      //     this.store.dispatch(tripsActions.addTrip({ trip: trip }));
-      //   });
-      //   console.log('load',results);
-      //   this.store.dispatch({type: '[Trips] Load Trip State Success', payload: results});
-      // });
-      this.store.dispatch(tripsActions.loadTripState());
+
     }
 
   public addTrip() {

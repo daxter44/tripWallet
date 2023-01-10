@@ -34,7 +34,7 @@ export class CreateComponent extends Destroyable implements ViewDidLeave {
   constructor(private store: Store<TripsState>, private navController: NavController) { 
     super();
     this.store.select(selectAllTrips).pipe(takeUntil(this.destroyed$)).subscribe(trips => {
-      this.newTripId = trips.length+1;
+      this.newTripId = trips.length;
     });
   }
 

@@ -18,3 +18,7 @@ export const selectActualTrip = createSelector(selectAllTrips, (trips: trip[]) =
       return new Date(a.endDate).getDate() - b.endDate.getDate();
     })[0];
 } );
+export const selectTripById = (tripId: number) => createSelector(
+  selectAllTrips,
+  entities => entities[tripId]
+);

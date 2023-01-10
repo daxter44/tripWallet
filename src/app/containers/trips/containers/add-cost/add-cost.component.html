@@ -2,7 +2,7 @@
   <ion-item>
     <ion-label  position="stacked">Type:</ion-label>
     <ion-select
-      placeholder="Select type"
+      placeholder="Select type"  formControlName="type"
     >
     <ion-select-option *ngFor="let type of costTypes" [value]="type">{{ type.name }}</ion-select-option>
   </ion-select>
@@ -11,10 +11,17 @@
     <ion-label  position="stacked">Amount:</ion-label>
     <ion-input type="number" formControlName="amount"></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-label  position="stacked">Currency:</ion-label>
-    <ion-textarea formControlName="currency"></ion-textarea>
-  </ion-item>
+  <ng-container  *ngIf="{
+    trip: trip$ | async} as view">
+    <ion-item>
+      <ion-label  position="stacked">Currency:</ion-label>
+      <ion-input  id="costCurrency" (ionBlur)="fetchExchangeRate($event, view.trip?.currency)" formControlName="currency"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label  position="stacked">{{ this.exchangeRate }}</ion-label>
+    </ion-item>
+  </ng-container> 
+ 
   <ion-item>
     <ion-label position="stacked">Date: </ion-label>
     <ion-datetime-button datetime="date"></ion-datetime-button>
@@ -26,7 +33,7 @@
     </ion-modal>
   </ion-item>
 
-  <ion-button  type="submit" [disabled]="!costForm.valid">
+  <ion-button  type="submit" [disabled]="!costForm.valid || exchangeRateLoading">
     Create
   </ion-button>
 </form>
