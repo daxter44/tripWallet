@@ -12,12 +12,12 @@ const routes: Routes = [
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-      },
-      {
         path: 'trips',
         loadChildren: () => import('../containers/trips/trips.module').then(m => m.TripsPageModule)
+      },
+      {
+        path: 'pastTrips',
+        loadChildren: () => import('../containers/past-trips/past-trips.module').then(m => m.PastTripsPageModule)
       }
     ]
   }

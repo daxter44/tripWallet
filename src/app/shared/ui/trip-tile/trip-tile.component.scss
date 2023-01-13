@@ -17,11 +17,19 @@
   ion-card {
     background: transparent;
     box-shadow: none;
-  }
 
-  ion-card-header {
-    bottom: 8px;
-    border-radius: 8px;
+    ion-card-header {
+      bottom: 8px;
+      border-radius: 8px;
+
+      ion-card-title {
+        display: flex;
+      }
+    }
+  }
+  .delete-btn {
+    width: 100%;
+    display: flex;
   }
 
 

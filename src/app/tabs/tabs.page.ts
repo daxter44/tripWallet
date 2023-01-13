@@ -12,6 +12,7 @@ export class TabsPage {
   constructor(
     private navController: NavController, private store: Store<TripsState>) {
     }
+    
   public onTabClick(event: { tab: any; }): void {
     this.navController.navigateRoot(`/application/${event.tab}`);
   }

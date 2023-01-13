@@ -19,6 +19,9 @@ export const tripsFeature = createFeature({
     }),
     on(tripActions.loadTripStateSuccess, (state, { trip }) => {
       return tripAdapter.setAll(trip, state)
+    }), 
+    on(tripActions.removeTrip, (state, { tripId }) => {
+      return tripAdapter.removeOne(tripId, state)
     }),
   )
 })

@@ -9,6 +9,13 @@ export const addTrip = createAction(
     props<{ trip: trip}>()
   );
 
+
+export const removeTrip = createAction(
+  '[Trip Store] Remove trip',
+  props<{ tripId: number}>()
+);
+
+
   export const loadTripState = createAction('[Trip Store] Load data into Trip');
   export const loadTripStateSuccess = createAction('[Trip Store] Load data into Trip success', props<{ trip: trip[] }>());
   export const loadTripStateFailure = createAction('[Trip Store] Load data into Trip failure', props<{ error: any }>());

@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Past trips</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container  *ngIf="{
+    trips: trips$ | async} as view">
+  <ion-list >
+    <ion-item *ngFor="let trip of view.trips">
+      <app-trip-tile [trip]="trip"></app-trip-tile>
+    </ion-item>
+  </ion-list>
+  </ng-container>
+</ion-content>

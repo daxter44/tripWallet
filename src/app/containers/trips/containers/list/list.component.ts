@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { TripsState } from 'src/app/shared/interfaces/storeStates/tripsState.interface';
 import { trip } from 'src/app/shared/interfaces/trip.interface';
 import { StorageService } from 'src/app/shared/services/storage.service';
-import { selectAllTrips } from 'src/app/shared/store/trips/trip.selectors';
+import { selectAllTrips, selectFeaturedTrips } from 'src/app/shared/store/trips/trip.selectors';
 
 @Component({
   selector: 'app-list',
@@ -12,7 +12,7 @@ import { selectAllTrips } from 'src/app/shared/store/trips/trip.selectors';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent{
-  public trips$ = this.store.select(selectAllTrips);
+  public trips$ = this.store.select(selectFeaturedTrips);
   constructor(private store: Store<TripsState>, 
     private navController: NavController,
     private storageService: StorageService) {

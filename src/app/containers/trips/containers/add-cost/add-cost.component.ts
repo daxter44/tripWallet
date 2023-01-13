@@ -11,7 +11,6 @@ import { selectAllCosts } from 'src/app/shared/store/costs/cost.selectors';
 import * as costActions from "../../../../shared/store/costs/cost.actions";
 import { cost } from 'src/app/shared/interfaces/cost.interface';
 import { CostType, costTypesInitialState } from 'src/app/shared/interfaces/costType.interface';
-import { costsInitialState } from 'src/app/shared/store/costs/cost.reducer';
 import { ExchangeRateService } from 'src/app/shared/services/exchangeRate.service';
 import { selectTripById } from 'src/app/shared/store/trips/trip.selectors';
 import { trip } from 'src/app/shared/interfaces/trip.interface';

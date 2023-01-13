@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'trips',
     loadChildren: () => import('./containers/trips/trips.module').then( m => m.TripsPageModule)
+  },
+  {
+    path: 'pastTrips',
+    loadChildren: () => import('./containers/past-trips/past-trips.module').then(m => m.PastTripsPageModule)
   }
 ];
 @NgModule({

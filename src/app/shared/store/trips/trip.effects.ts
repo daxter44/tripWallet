@@ -28,7 +28,7 @@ export class TripEffects {
 
     saveData = createEffect(() => {
         return this.actions.pipe(
-            ofType(TripActions.addTrip),
+            ofType(TripActions.addTrip, TripActions.removeTrip),
             concatLatestFrom(() => this.store.select(selectAllTrips)),
             mergeMap(([_, trips]) => {
                 return this.storageService.set('trips', trips).pipe(
