@@ -1,0 +1,83 @@
+<ion-header>
+ 
+</ion-header>
+
+<ion-content>
+    <ng-container  *ngIf="{
+        trip: trip$ | async} as view">
+        <ion-card>
+          <ion-card-header>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6" *ngIf="view.trip">
+                  <ion-card-title>{{view.trip!.name}}</ion-card-title>
+                  <ion-card-subtitle>{{ countDays(view.trip.startDate, view.trip.endDate )}} Days</ion-card-subtitle>
+                </ion-col>
+                <ion-col size="6" *ngIf="view.trip" class="d-flex w-100 ion-justify-content-end ion-align-items-center">
+                  <ion-card-subtitle>
+                    <ion-icon name="airplane-outline"></ion-icon>
+                    {{view.trip!.startDate | date: 'dd.MM.yyyy'}}
+                  </ion-card-subtitle>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-header>
+        </ion-card>
+      </ng-container>
+</ion-content>
+
+<!-- 
+
+<ion-card>
+    <ng-container *ngIf="{
+      trip: trip$ | async, 
+      costs: costs$ | async } as view">
+  
+    <ion-card-header *ngIf="view.trip">
+      <ion-card-title>{{view.trip!.name}}</ion-card-title>
+      <ion-card-subtitle>{{ countDays(view.trip.startDate, view.trip.endDate )}} Days</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" *ngIf="view.costs">
+            <ion-icon name="cash-outline"></ion-icon>
+            <span class="text-with-icon ion-padding-end">
+              Used {{ sumCosts(view.costs)| number : '1.2-2' }} {{ view.trip!.currency }}
+            </span>
+          </ion-col>
+          <ion-col size="6">
+            <ion-icon name="cash-outline"></ion-icon>
+            <span class="text-with-icon ion-padding-end">
+              Budget {{view.trip!.budget}} {{ view.trip!.currency }}
+            </span>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-icon name="airplane-outline"></ion-icon>
+            <span class="text-with-icon ion-text-lowercase ion-padding-end">
+              {{view.trip!.startDate | date: 'dd.MM.yyyy'}}
+            </span>
+          </ion-col>
+          <ion-col size="6">
+            <ion-icon name="home-outline"></ion-icon>
+            <span class="text-with-icon ion-text-lowercase ion-padding-end">
+              {{view.trip!.endDate | date: 'dd.MM.yyyy'}}
+            </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    <div class="display-flex ion-justify-content-center">
+      <ion-button (click)="addCost(view.trip!.tripId)">Add cost</ion-button>
+    </div>
+    <ion-list class="ion-padding">
+      <h1>Costs</h1>
+      <ion-item *ngFor="let cost of view.costs">
+        <app-cost-tile [cost]="cost"></app-cost-tile>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+  </ion-card> -->

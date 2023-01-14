@@ -12,7 +12,6 @@ import { TripStoreModule } from './shared/store/trips/trip-store.module';
 import { CostStoreModule } from './shared/store/costs/cost-store.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StorageService } from './shared/services/storage.service';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
