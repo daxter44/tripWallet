@@ -1,24 +1,33 @@
 <ion-grid>
     <ion-row>
-      <ion-col size="3">
+      <ion-col >
         <span class="text-with-icon ion-text-capitalize ion-padding-end">
           <ion-icon name="cash-outline"></ion-icon>
           {{ cost.amount }} {{ cost.currency }}
         </span>
       </ion-col>
-      <ion-col size="3">
+
+    </ion-row>
+    <ion-row>
+      <ion-col >
         <span class="text-with-icon ion-text-capitalize ion-padding-end">
           <ion-icon name="bag-outline"></ion-icon>
           {{ cost.type.name }} 
         </span>
       </ion-col>
-      <ion-col size="3">
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
         <span class="text-with-icon ion-text-capitalize ion-padding-end">
           <ion-icon name="calendar-outline"></ion-icon>
           {{ cost.date | date: 'dd.MM.yyyy' }}
         </span>
       </ion-col>
-      <ion-col size="3" class="display-flex ion-justify-content-center"> 
+    </ion-row>
+
+    <ion-row>
+      <ion-col  class="d-flex ion-justify-content-end"> 
         <ion-button (click)="removeCost()">Delete</ion-button>
       </ion-col>
     </ion-row>

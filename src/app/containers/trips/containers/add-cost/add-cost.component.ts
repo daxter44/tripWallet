@@ -25,6 +25,7 @@ export class AddCostComponent extends Destroyable implements OnInit {
 
   public defaultDate = new Date().toISOString();
   public costTypes = costTypesInitialState;
+  public providedCostType: CostType|undefined;
   private clearPage$ : Subject<void> = new Subject<void>();
   costForm: FormGroup<costForm> = new FormGroup<costForm>({
     type: new FormControl<CostType>({value: costTypesInitialState[0], disabled: false}, { nonNullable: true }),
@@ -46,16 +47,19 @@ export class AddCostComponent extends Destroyable implements OnInit {
 
   ngOnInit() {
     this.initializeViewData();
+    if(this.providedCostType) {
+      this.costForm.controls.type?.patchValue(this.providedCostType);
+    }
   }
 
   private initializeViewData(): void {
     this.activeRoute.params
     .pipe(
-      map((params) => params['id']),
+      map((params) => [params['id'], params['type']]),
       takeUntil(this.clearPage$)
     )
-    .subscribe((id) => {
-      
+    .subscribe(([id, paramType]) => {
+      this.providedCostType = this.costTypes.find((costType)=> costType.type == paramType);
       this.tripId = parseInt(id);
       this.trip$= this.store.select(selectTripById(parseInt(id)));
     });

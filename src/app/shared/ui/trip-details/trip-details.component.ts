@@ -26,7 +26,7 @@ implements OnInit, ViewDidLeave {
   constructor(private activeRoute: ActivatedRoute, private navController: NavController, private store: Store<TripsState>, private router: Router) {
     super();
 
-    this.store.dispatch(CostActions.loadCostState());
+   // this.store.dispatch(CostActions.loadCostState());
   }
 
   public countDays(startDate: Date, endDate: Date): number {
@@ -61,12 +61,7 @@ implements OnInit, ViewDidLeave {
   }
 
   private initializeViewData(): void {
-    this.trip$.pipe(takeUntil(this.destroyed$)).subscribe(trip => {
-      console.log(trip);
-      if(trip) {
-        this.costs$ = this.store.select(selectAllCostByTrip(trip.tripId))
-      }
-    });
+   
     this.activeRoute.params
       .pipe(
         map((params) => params['id']),

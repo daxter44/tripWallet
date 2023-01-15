@@ -1,4 +1,6 @@
 ion-content {
     display: flex;
-    padding: 16px;
+    ion-list {
+        margin: 16px;
+    }
 }

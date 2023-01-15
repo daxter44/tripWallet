@@ -16,8 +16,8 @@ export class CostsEffects {
         return this.actions.pipe(
             ofType(CostActions.addCost, CostActions.removeCost),
             concatLatestFrom(() => this.store.select(selectAllCosts)),
-            mergeMap(([_, trips]) => {
-                return this.storageService.set('costs', trips).pipe(
+            mergeMap(([_, costs]) => {
+                return this.storageService.set('costs', costs).pipe(
                     map((results) => {
                         return CostActions.saveCostStateSuccess();
                     })

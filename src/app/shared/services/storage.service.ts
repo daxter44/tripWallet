@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { from, Observable } from 'rxjs';
 import { TripsState } from '../interfaces/storeStates/tripsState.interface';
 import * as tripsActions from "../store/trips/trip.actions";
+import * as costsActions from "../store/costs/cost.actions";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,10 @@ export class StorageService {
 
   constructor(private storage: Storage, private store: Store<TripsState>) {
     this.init().then(() => {
-      this.store.dispatch(tripsActions.loadTripState());})
+      console.log('aaa')
+      this.store.dispatch(tripsActions.loadTripState());
+      this.store.dispatch(costsActions.loadCostState());
+    })
 
   }
 

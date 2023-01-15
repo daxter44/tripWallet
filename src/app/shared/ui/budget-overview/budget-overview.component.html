@@ -1,0 +1,12 @@
+<div *ngIf="{
+  costs: costs$ | async } as view" class="ion-padding">
+  <div *ngIf="view.costs && view.costs.length > 0" class="ion-margin">
+    <span class="d-flex ion-justify-content-center">You can spend</span>
+    <h1 class="d-flex ion-justify-content-center ion-text-lowercase">{{(trip.budget - sumCosts(view.costs)) / tripLength | number : '1.2-2'}} {{trip.currency}} / day </h1>
+  </div>
+  <div class="d-flex ion-justify-content-between ion-text-lowercase" *ngIf="view.costs && view.costs.length > 0"> 
+    <span>{{sumCosts(view.costs)| number : '1.2-2'}} {{trip.currency}} used</span>
+    <span> of {{trip.budget| number : '1.2-2'}} {{trip.currency}}</span>
+  </div>
+  <ion-progress-bar *ngIf="view.costs && view.costs.length > 0" [value]="getBudgetUsage(view.costs, trip.budget)" class="ion-padding"></ion-progress-bar>
+</div>

@@ -22,8 +22,16 @@
               </ion-row>
             </ion-grid>
           </ion-card-header>
+          <ion-card-content *ngIf="view.trip">
+            <app-budget-overview [trip]="view.trip" [tripLength] ="countDaysLeft(view.trip.startDate, view.trip.endDate)">
+
+            </app-budget-overview>
+            
+          </ion-card-content>
         </ion-card>
+        <app-add-cost-panel  *ngIf="view.trip" [tripId] ="view.trip.tripId"></app-add-cost-panel>
       </ng-container>
+      
 </ion-content>
 
 <!-- 

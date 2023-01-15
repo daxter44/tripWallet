@@ -18,5 +18,13 @@ export class TripOverviewPage {
     return Math.ceil(days);
   }
 
+  public countDaysLeft(startDate: Date, endDate: Date): number {
+    const tripStarted = startDate.getTime() - new Date().getTime()  < 0 
+    if(!tripStarted) {
+      return Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
+    } 
+    return Math.ceil((endDate.getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+  }
+
   
 }

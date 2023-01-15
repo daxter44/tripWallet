@@ -14,11 +14,12 @@
   <ng-container  *ngIf="{
     trip: trip$ | async} as view">
     <ion-item>
-      <ion-label  position="stacked">Currency:</ion-label>
+      <ion-label  position="stacked">Main currency:</ion-label>
       <ion-input  id="costCurrency" (ionBlur)="fetchExchangeRate($event, view.trip?.currency)" formControlName="currency"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label  position="stacked">{{ this.exchangeRate }}</ion-label>
+    <ion-item disabled="true">
+      <ion-label position="stacked">Exchange rate: </ion-label>
+      <ion-label >{{ this.exchangeRate }}</ion-label>
     </ion-item>
   </ng-container> 
  

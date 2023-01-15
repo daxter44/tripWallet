@@ -27,6 +27,10 @@ const routes: Routes = [
       {
         path: ':id/addCost',
         component: AddCostComponent,
+      },
+      {
+        path: ':id/addCost/:type',
+        component: AddCostComponent,
       }
     ]
   }
