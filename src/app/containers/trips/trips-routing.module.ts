@@ -13,12 +13,16 @@ const routes: Routes = [
     component: TripsPage,
     children: [
       {
-        path: 'create',
-        component: CreateComponent,
+        path: '',
+        component: ListComponent,
       },
       {
         path: 'list',
         component: ListComponent,
+      },
+      {
+        path: 'create',
+        component: CreateComponent,
       },
       {
         path: ':id/details',

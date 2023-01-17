@@ -28,7 +28,7 @@ export const costTypesInitialState: CostType[] = [
     },
     {
         costTypeId: 4,
-        icon: "happy-outline",
+        icon: "ticket-outline",
         name: "Entertainment",
         type: "entertainment"
     },
