@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export interface CostType {
     costTypeId: number;
     icon: string;

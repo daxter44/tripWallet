@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as currencyActions from "./shared/store/currencies/currency.actions";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor( private store: Store) {
+
+    this.store.dispatch(currencyActions.loadCurrencyState());
+    }
 }

@@ -2,9 +2,8 @@
   <ion-card-header>
     <ion-card-title class="d-flex w-100 ion-justify-content-between ion-align-items-center">
       <span>{{ trip.name }}</span>
-      <ion-icon name="chevron-forward-outline"></ion-icon>
     </ion-card-title>
-    <ion-card-subtitle class="sp-body-2-text">
+    <ion-card-subtitle >
       <ion-icon name="calendar-outline"></ion-icon>
       <span class="ion-text-lowercase ion-padding-end">
         {{ trip.startDate | date: 'dd.MM.yyyy' }}
@@ -12,12 +11,12 @@
 
       <ion-icon name="cash-outline"></ion-icon>
       <span class="ion-text-capitalize ion-padding-end">
-        {{ trip.budget }}
+        {{ trip.budget }} {{ trip.currency.code }}
       </span>
     </ion-card-subtitle>
-    <ion-col size="3" class="delete-btn ion-justify-content-end"> 
+    <div class="delete-btn d-flex ion-justify-content-end"> 
       <ion-button (click)="removeTrip()">Delete</ion-button>
-    </ion-col>
+    </div>
     
   </ion-card-header>
 </ion-card>

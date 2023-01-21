@@ -15,7 +15,6 @@ export class StorageService {
 
   constructor(private storage: Storage, private store: Store<TripsState>) {
     this.init().then(() => {
-      console.log('aaa')
       this.store.dispatch(tripsActions.loadTripState());
       this.store.dispatch(costsActions.loadCostState());
     })

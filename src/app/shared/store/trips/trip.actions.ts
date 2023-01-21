@@ -9,6 +9,10 @@ export const addTrip = createAction(
     props<{ trip: trip}>()
   );
 
+  export const addTripSuccess = createAction(
+    '[Trip Store] Add trip success',
+  );
+
 
 export const removeTrip = createAction(
   '[Trip Store] Remove trip',

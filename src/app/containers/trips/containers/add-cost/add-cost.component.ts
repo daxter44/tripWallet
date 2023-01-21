@@ -14,6 +14,8 @@ import { CostType, costTypesInitialState } from 'src/app/shared/interfaces/costT
 import { ExchangeRateService } from 'src/app/shared/services/exchangeRate.service';
 import { selectTripById } from 'src/app/shared/store/trips/trip.selectors';
 import { trip } from 'src/app/shared/interfaces/trip.interface';
+import { currency } from 'src/app/shared/interfaces/currency.interface';
+import { selectAllCurrencies } from 'src/app/shared/store/currencies/currency.selectors';
 
 @Component({
   selector: 'app-add-cost',
@@ -30,15 +32,20 @@ export class AddCostComponent extends Destroyable implements OnInit {
   costForm: FormGroup<costForm> = new FormGroup<costForm>({
     type: new FormControl<CostType>({value: costTypesInitialState[0], disabled: false}, { nonNullable: true }),
     amount: new FormControl<number>({value: 0, disabled: false}, { nonNullable: true }),
-    currency: new FormControl<string>({value: '', disabled: false}, { nonNullable: true }),
+    currency: new FormControl<currency|undefined>({value: undefined, disabled: false}, { nonNullable: true }),
     date: new FormControl<string>({value: this.defaultDate, disabled: false}, { nonNullable: true })
    });
    private newCostId: number = 0;
    private tripId: number = 0;
    public trip$: Observable<trip|undefined> = of(undefined);
+   public currencies$: Observable<currency[]> = this.store.select(selectAllCurrencies);
    public exchangeRateLoading:boolean = false;
 
-  constructor(private store: Store<CostState>, private activeRoute: ActivatedRoute, private navController: NavController, private exchangeRateService: ExchangeRateService) {
+  constructor(
+    private store: Store<CostState>, 
+    private activeRoute: ActivatedRoute, 
+    private navController: NavController, 
+    private exchangeRateService: ExchangeRateService) {
     super();
     this.store.select(selectAllCosts).pipe(takeUntil(this.destroyed$)).subscribe(costs => {
       this.newCostId = costs.length+1;
@@ -71,11 +78,11 @@ export class AddCostComponent extends Destroyable implements OnInit {
     })
   }
 
-public fetchExchangeRate(e:any, to:string|undefined) {
-  const costCurrency =  e.target.value;
-  if(to!= undefined && to !== costCurrency){
+public fetchExchangeRate(e:any, to:currency|undefined) {
+  const costCurrency: currency =  e.target.value;
+  if(costCurrency && to!= undefined && to.code !== costCurrency.code){
     this.exchangeRateLoading = true;
-    this.exchangeRateService.getExchangeRate(costCurrency, to)
+    this.exchangeRateService.getExchangeRate(costCurrency.code, to.code)
     .pipe(
       takeUntil(this.clearPage$)
     )

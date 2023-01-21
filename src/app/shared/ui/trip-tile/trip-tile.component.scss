@@ -1,10 +1,14 @@
-
-
 :host {
   cursor: pointer;
   display: block;
+  margin: 10px;
   margin-bottom: 1rem;
   width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--ion-color-primary);
+  border-color: var(--ion-color-primary);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
+    rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
 
   .ratio-16-9 {
     aspect-ratio: 16/9;
@@ -15,23 +19,14 @@
   }
 
   ion-card {
-    background: transparent;
+    background-color: #faf1f0;
     box-shadow: none;
-
-    ion-card-header {
-      bottom: 8px;
-      border-radius: 8px;
-
-      ion-card-title {
-        display: flex;
-      }
-    }
   }
   .delete-btn {
     width: 100%;
     display: flex;
+    padding-top: 8px;
   }
-
 
   ion-img {
     display: inline-block;

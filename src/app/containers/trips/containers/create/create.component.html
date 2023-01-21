@@ -1,37 +1,71 @@
 <form [formGroup]="tripCreateForm" (ngSubmit)="submit()">
-  <ion-item>
-    <ion-label  position="stacked">Name:</ion-label>
+  <ion-item color="tretiary">
+    <ion-label position="stacked">Name:</ion-label>
     <ion-input type="text" formControlName="name"></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-label  position="stacked">Budget:</ion-label>
+  <ion-item color="tretiary">
+    <ion-label position="stacked">Budget:</ion-label>
     <ion-input type="number" formControlName="budget"></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-label  position="stacked">Currency:</ion-label>
-    <ion-input formControlName="currency"></ion-input>
-  </ion-item>
-  <ion-item>
+  <ng-container
+    *ngIf="{
+      currencies: currencies$ | async
+    } as view"
+  >
+    <ion-item color="tretiary">
+      <ion-label position="stacked">Currency:</ion-label>
+      <ion-select placeholder="Select currency" formControlName="currency">
+        <ion-select-option
+          *ngFor="let currency of view.currencies"
+          [value]="currency"
+          >{{ currency.code }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+  </ng-container>
+  <ion-item color="tretiary">
     <ion-label position="stacked">Start date: </ion-label>
     <ion-datetime-button datetime="startDatetime"></ion-datetime-button>
 
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime id="startDatetime" (ionChange)="getStartDate($event)" formControlName="startDate" [value]="defaultDate"></ion-datetime>
+        <ion-datetime
+          id="startDatetime"
+          (ionChange)="setStartDate($event)"
+          formControlName="startDate"
+          [value]="defaultStartDate"
+        ></ion-datetime>
       </ng-template>
     </ion-modal>
   </ion-item>
-  <ion-item>
+  <ion-item color="tretiary">
     <ion-label position="stacked">End date: </ion-label>
     <ion-datetime-button datetime="endDatetime"></ion-datetime-button>
 
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime id="endDatetime" (ionChange)="getEndDate($event)" formControlName="endDate" [value]="defaultDate"></ion-datetime>
+        <ion-datetime
+          id="endDatetime"
+          [min]="getStartDate()"
+          (ionChange)="setEndDate($event)"
+          formControlName="endDate"
+          [value]="defaultEndDate"
+        ></ion-datetime>
       </ng-template>
     </ion-modal>
   </ion-item>
-  <ion-button  type="submit" [disabled]="!tripCreateForm.valid">
-    Create
-  </ion-button>
+  <p
+    *ngIf="
+      tripCreateForm.errors &&
+      tripCreateForm.errors['dateValid'] === true &&
+      (tripCreateForm.touched || tripCreateForm.dirty)
+    "
+  >
+    Please add a valid start and end dates
+  </p>
+  <div class="d-flex ion-justify-content-center">
+    <ion-button type="submit" [disabled]="!tripCreateForm.valid">
+      Create
+    </ion-button>
+  </div>
 </form>

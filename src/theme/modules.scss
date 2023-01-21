@@ -1,0 +1,24 @@
+@import "modules/cards.scss";
+
+ion-toolbar {
+  text-align: center;
+  color: var(--ion-color-tretiary);
+}
+
+ion-item {
+  --inner-border-width: 0;
+}
+
+ion-card {
+  --background: white;
+}
+
+ion-card-title {
+  font-size: 26px;
+}
+
+ion-datetime {
+  color: #503047;
+  border-radius: 16px;
+  box-shadow: rgba(var(--ion-color-tretiary), 0.3) 0px 10px 15px -3px;
+}

@@ -12,6 +12,7 @@ import { TripStoreModule } from './shared/store/trips/trip-store.module';
 import { CostStoreModule } from './shared/store/costs/cost-store.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StorageService } from './shared/services/storage.service';
+import { CurrencyStoreModule } from './shared/store/currencies/currency-store.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -20,6 +21,7 @@ import { StorageService } from './shared/services/storage.service';
     AppRoutingModule,
     TripStoreModule,
     CostStoreModule,
+    CurrencyStoreModule,
     StoreModule.forRoot({}, {}), 
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
