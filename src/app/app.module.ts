@@ -16,19 +16,20 @@ import { CurrencyStoreModule } from './shared/store/currencies/currency-store.mo
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
+    BrowserModule,
+    IonicModule.forRoot(),
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
     AppRoutingModule,
     TripStoreModule,
     CostStoreModule,
     CurrencyStoreModule,
-    StoreModule.forRoot({}, {}), 
-    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      autoPause: true
-    })],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, StorageService],
+      autoPause: true,
+    }),
+  ],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

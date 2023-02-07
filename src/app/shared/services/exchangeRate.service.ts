@@ -24,7 +24,6 @@ export class ExchangeRateService {
       .get(`https://api.exchangerate.host/convert?from=${from}&to=${to}`)
       .pipe(
         catchError((err) => {
-          console.log(err);
           return throwError(err);
         })
       );
