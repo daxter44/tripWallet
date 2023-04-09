@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
@@ -39,15 +39,15 @@ export class AddCostComponent extends Destroyable implements OnInit {
     ),
     amount: new FormControl<number>(
       { value: 0, disabled: false },
-      { nonNullable: true }
+      { nonNullable: true, validators: [Validators.required] }
     ),
     currency: new FormControl<currency | undefined>(
       { value: undefined, disabled: false },
-      { nonNullable: true }
+      { nonNullable: true, validators: [Validators.required] }
     ),
     date: new FormControl<string>(
       { value: this.defaultDate, disabled: false },
-      { nonNullable: true }
+      { nonNullable: true, validators: [Validators.required] }
     ),
   });
   private newCostId: number = 0;
@@ -91,6 +91,11 @@ export class AddCostComponent extends Destroyable implements OnInit {
         );
         this.tripId = parseInt(id);
         this.trip$ = this.store.select(selectTripById(parseInt(id)));
+
+        this.trip$.subscribe((trip) => {
+          console.log('bbb', trip);
+          this.costForm.controls.currency?.patchValue(trip?.currency);
+        });
       });
   }
   public getDate(e: any) {

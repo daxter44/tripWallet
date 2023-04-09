@@ -1,15 +1,22 @@
 <ion-grid>
   <ion-row class="d-flex ion-justify-content-center">
-    <h1> Add cost: </h1>
+    <h1>Add cost:</h1>
   </ion-row>
   <ion-row>
-    <ion-col *ngFor="let cost of costTypes" size-xs="6" size-md="3"  class="d-flex ion-padding ion-justify-content-center">
-      <ion-fab-button (click)="onButtonClick(cost.type)">
-        <div class="button-content">
-          <ion-icon [name]="cost.icon"></ion-icon>
-          <span>{{cost.name}}</span>
-        </div>
-      </ion-fab-button>
+    <ion-col
+      *ngFor="let cost of costTypes"
+      size-xs="4"
+      size-md="3"
+      class="d-flex ion-justify-content-center"
+    >
+      <ion-button
+        (click)="onButtonClick(cost.type)"
+        class="button-content"
+        [ngClass]="getColor(cost.costTypeId)"
+      >
+        <ion-icon [name]="cost.icon"></ion-icon>
+      </ion-button>
+      <span>{{ cost.name }}</span>
     </ion-col>
   </ion-row>
 </ion-grid>

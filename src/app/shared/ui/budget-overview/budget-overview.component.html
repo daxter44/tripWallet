@@ -1,11 +1,52 @@
-<div *ngIf="{
-  costs: costs$ | async } as view">
-  <div *ngIf="view.costs && view.costs.length > 0" class="ion-margin">
-    <span class="d-flex ion-justify-content-center">You can spend</span>
-    <h1 class="d-flex ion-justify-content-center ion-text-lowercase">{{(trip.budget - sumCosts(view.costs)) / tripLength | number : '1.2-2'}} {{trip.currency.code}} / day </h1>
-  </div>
-  <div class="d-flex ion-justify-content-center ion-text-lowercase" *ngIf="view.costs && view.costs.length > 0"> 
-    <span>{{sumCosts(view.costs)| number : '1.2-2'}} {{trip.currency.code}} used of {{trip.budget| number : '1.2-2'}} {{trip.currency.code}}</span>
-  </div>
-  <ion-progress-bar *ngIf="view.costs && view.costs.length > 0" [value]="getBudgetUsage(view.costs, trip.budget)" class="ion-padding"></ion-progress-bar>
+<div
+  *ngIf="{
+    costs: costs$ | async
+  } as view"
+>
+  <ng-container *ngIf="view.costs && view.costs.length > 0 && trip.budget > 0">
+    <div class="ion-margin">
+      <span class="d-flex ion-justify-content-center">You can spend</span>
+      <h1 class="d-flex ion-justify-content-center ion-text-lowercase">
+        {{
+          (trip.budget - sumCosts(view.costs)) / tripLength | number : "1.2-2"
+        }}
+        {{ trip.currency.code }}
+      </h1>
+      <h1 class="d-flex ion-justify-content-center">per day</h1>
+    </div>
+
+    <ion-progress-bar
+      *ngIf="view.costs && view.costs.length > 0"
+      [value]="getBudgetUsage(view.costs, trip.budget)"
+      class="ion-padding"
+    ></ion-progress-bar>
+    <div
+      class="d-flex ion-justify-content-center usage-desc"
+      *ngIf="view.costs && view.costs.length > 0"
+    >
+      <span
+        >Total spend
+        <strong class="ion-text-lowercase"
+          >{{ sumCosts(view.costs) | number : "1.2-2" }}
+          {{ trip.currency.code }}</strong
+        >
+        from budget
+        <strong class="ion-text-lowercase"
+          >{{ trip.budget | number : "1.2-2" }} {{ trip.currency.code }}</strong
+        ></span
+      >
+    </div>
+  </ng-container>
+
+  <ng-container
+    *ngIf="view.costs && view.costs.length > 0 && trip.budget === 0"
+  >
+    <div class="ion-margin">
+      <span class="d-flex ion-justify-content-center">You spend</span>
+      <h1 class="d-flex ion-justify-content-center ion-text-lowercase">
+        {{ sumCosts(view.costs) | number : "1.2-2" }}
+        {{ trip.currency.code }}
+      </h1>
+    </div>
+  </ng-container>
 </div>

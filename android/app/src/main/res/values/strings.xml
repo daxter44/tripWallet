@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">trips-wallet</string>
+    <string name="title_activity_main">trips-wallet</string>
+    <string name="package_name">mm.tripWallet.tripWallet</string>
+    <string name="custom_url_scheme">mm.tripWallet.tripWallet</string>
+</resources>

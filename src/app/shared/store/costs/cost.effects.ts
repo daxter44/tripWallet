@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, mergeMap } from 'rxjs/operators';
 import * as CostActions from './cost.actions';
+import * as TripActions from './../trips/trip.actions';
 import { StorageService } from '../../services/storage.service';
 import { Store } from '@ngrx/store';
 import { selectAllCosts } from './cost.selectors';
@@ -19,7 +20,11 @@ export class CostsEffects {
 
   saveData = createEffect(() => {
     return this.actions.pipe(
-      ofType(CostActions.addCost, CostActions.removeCost),
+      ofType(
+        CostActions.addCost,
+        CostActions.removeCost,
+        TripActions.removeTrip
+      ),
       concatLatestFrom(() => this.store.select(selectAllCosts)),
       mergeMap(([_, costs]) => {
         return from(this.storageService.set('costs', costs)).pipe(
