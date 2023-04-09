@@ -22,3 +22,44 @@ app-budget-overview {
   width: 100%;
   padding: 0 16px;
 }
+
+.no-trips {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+
+  .title {
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    margin: 0;
+  }
+
+  .text {
+  }
+
+  .no-trips-content {
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 20px;
+
+    ion-card-header {
+      padding-top: 24px;
+      margin-bottom: 20px;
+    }
+
+    ion-card-content {
+      display: grid;
+      justify-content: center;
+    }
+
+    ion-button {
+      width: 50%;
+      justify-self: center;
+      margin-top: 20px;
+    }
+  }
+}

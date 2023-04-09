@@ -5,50 +5,66 @@
     *ngIf="{
         trip: trip$ | async} as view"
   >
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Hello traveler ! </ion-card-title>
-        <ion-card-subtitle
-          >Your trip details :
-        </ion-card-subtitle></ion-card-header
-      >
+    <div *ngIf="view.trip">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Hello traveler ! </ion-card-title>
+          <ion-card-subtitle
+            >Your trip details :
+          </ion-card-subtitle></ion-card-header
+        >
 
-      <ion-card-content *ngIf="view.trip">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="6" *ngIf="view.trip">
-              <h1 class="trip-name">{{view.trip!.name}}</h1>
-              <ion-card-subtitle
-                >{{ countDays(view.trip.startDate, view.trip.endDate )}}
-                Days</ion-card-subtitle
+        <ion-card-content *ngIf="view.trip">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6" *ngIf="view.trip">
+                <h1 class="trip-name">{{view.trip!.name}}</h1>
+                <ion-card-subtitle
+                  >{{ countDays(view.trip.startDate, view.trip.endDate )}}
+                  Days</ion-card-subtitle
+                >
+              </ion-col>
+              <ion-col
+                size="6"
+                *ngIf="view.trip"
+                class="d-flex w-100 ion-justify-content-end ion-align-items-center"
               >
-            </ion-col>
-            <ion-col
-              size="6"
-              *ngIf="view.trip"
-              class="d-flex w-100 ion-justify-content-end ion-align-items-center"
-            >
-              <ion-card-subtitle>
-                <ion-icon name="airplane-outline"></ion-icon>
-                {{view.trip!.startDate | date: 'dd.MM.yyyy'}}
-              </ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-content>
-    </ion-card>
-    <div class="d-flex ion-justify-content-center">
-      <app-budget-overview
+                <ion-card-subtitle>
+                  <ion-icon name="airplane-outline"></ion-icon>
+                  {{view.trip!.startDate | date: 'dd.MM.yyyy'}}
+                </ion-card-subtitle>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+      <div class="d-flex ion-justify-content-center">
+        <app-budget-overview
+          *ngIf="view.trip"
+          [trip]="view.trip"
+          [tripLength]="countDaysLeft(view.trip.startDate, view.trip.endDate)"
+        >
+        </app-budget-overview>
+      </div>
+      <app-add-cost-panel
         *ngIf="view.trip"
-        [trip]="view.trip"
-        [tripLength]="countDaysLeft(view.trip.startDate, view.trip.endDate)"
-      >
-      </app-budget-overview>
+        [tripId]="view.trip.tripId"
+      ></app-add-cost-panel>
     </div>
-    <app-add-cost-panel
-      *ngIf="view.trip"
-      [tripId]="view.trip.tripId"
-    ></app-add-cost-panel>
+    <div *ngIf="!view.trip" class="no-trips">
+      <ion-card class="no-trips-content">
+        <ion-card-header>
+          <p class="title">No trips yet</p>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="text">
+            There are no trips scheduled. Schedule new trip to show data and add
+            new trip costs.
+          </p>
+          <ion-button (click)="scheduleTrip()">Schedule trip</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </ng-container>
 </ion-content>
 

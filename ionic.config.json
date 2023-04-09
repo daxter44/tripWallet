@@ -1,5 +1,5 @@
 {
-  "name": "trips-wallet",
+  "name": "Trip Wallet",
   "integrations": {
     "capacitor": {}
   },
